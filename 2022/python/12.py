@@ -1,15 +1,5 @@
-#2022_12_12 1st puzzle
-input_filename = '2022/inputs/12.txt'
-temp = [
-    'Sabqponm',
-    'abcryxxl',
-    'accszExk',
-    'acctuvwj',
-    'abdefghi',
-    '',
-]
+dir_list = [[0, 1], [1, 0], [-1, 0], [0, -1]]
 
-dir_list = [[0,1],[1,0],[-1,0],[0,-1]]
 
 def height(char):
     if char.islower():
@@ -20,59 +10,70 @@ def height(char):
         height = ord('z') - ord('a') + 1
     return height
 
-def viable_path(grid, pos, visited_list, dir):
-    new_pos = [pos[0] + dir[0], pos[1] + dir[1]]
+
+def viable_path(grid, visited_list, row, col, dir):
+    row_t = row + dir[0]
+    col_t = col + dir[1]
     if any([
-        new_pos[0] < 0,
-        new_pos[1] < 0,
-        new_pos[0] == len(grid),
-        new_pos[1] == len(grid[0]),
+        row_t < 0,
+        col_t < 0,
+        row_t >= len(grid),
+        col_t >= len(grid[0]),
+        [row_t, col_t] in visited_list,
     ]):
         return False
-    if any([
-        abs(height(grid[new_pos[0]][new_pos[1]]) - height(grid[pos[0]][pos[1]])) > 1,
-        new_pos in visited_list,
-    ]):
+    if height(grid[row_t][col_t]) - height(grid[row][col]) > 1:
         return False
     return True
 
-def explore_path(grid):
-    shortest_path = None
-    for i, row in enumerate(grid):
-        if 'S' in row:
-            pos = [i, row.index('S')]
-    visited_list = [pos]
-    dir_ctr_list = [0]
-    while len(dir_ctr_list):
-        if dir_ctr_list[-1] == 4:
-            dir_ctr_list.pop()
-            visited_list.pop()
-            continue
-        if shortest_path is not None and len(dir_ctr_list) >= shortest_path:
-            pos = visited_list.pop()
-            continue
-        if grid[pos[0]][pos[1]] == 'E':
-            shortest_path = len(dir_ctr_list)
-            pos = visited_list.pop()
-            dir_ctr_list[-1] += 1
-            continue
-        
-        # print(dir_ctr_list)
-        dir = dir_list[dir_ctr_list[-1]]
-        if viable_path(grid, pos, visited_list, dir):
-            pos = [pos[0] + dir[0], pos[1] + dir[1]]
-            dir_ctr_list.append(0)
-            visited_list.append(pos)
-            continue
-        dir_ctr_list[-1] += 1
-    return shortest_path
 
-
-with open(input_filename) as f:
+def explore_path(input_filename, subproblem):
     grid = []
-    # for line in temp:
-    for line in f:
-        if line.strip() != '':
-            grid.append([char for char in line.strip()])
-    result1 = explore_path(grid)
+    reach_grid = []
+    visited_list = []
+    latest_list = []
+    with open(input_filename) as f:
+        # for line in temp:
+        for line in f:
+            if line.strip() != '':
+                grid.append([char for char in line.strip()])
+                reach_grid.append([None for char in line.strip()])
+    for row, line in enumerate(grid):
+        for col, char in enumerate(line):
+            if any([
+                subproblem == 1 and char == 'S',
+                subproblem == 2 and height(char) == 1,
+            ]):
+                visited_list.append([row, col])
+                latest_list.append([row, col])
+                reach_grid[row][col] = 0
+
+    max_n = len(grid) * len(grid[0])
+    for i in range(max_n):
+        if len(latest_list) == 0:
+            break
+        old_latest_list = latest_list[:]
+        latest_list = []
+        for [row, col] in old_latest_list:
+            for dir in dir_list:
+                if viable_path(grid, visited_list, row, col, dir):
+                    row_t = row + dir[0]
+                    col_t = col + dir[1]
+                    if grid[row_t][col_t] == 'E':
+                        return i + 1
+                    visited_list.append([row_t, col_t])
+                    latest_list.append([row_t, col_t])
+                    reach_grid[row_t][col_t] = i + 1
+    raise Warning('Not found')
+
+
+def main():
+    input_filename = '2022/inputs/12.txt'
+    result1 = explore_path(input_filename, subproblem=1)
     print(result1)
+    result2 = explore_path(input_filename, subproblem=2)
+    print(result2)
+
+
+if __name__ == '__main__':
+    main()
