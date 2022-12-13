@@ -11,7 +11,7 @@ def viewing_distance(grid, tallest_tree):
 
 
 def main():
-    input_filename = 'inputs/08.txt'
+    input_filename = '2022/inputs/08.txt'
     with open(input_filename) as f:
         invisible_trees = 0
         grid = []

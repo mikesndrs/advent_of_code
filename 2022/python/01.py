@@ -2,7 +2,7 @@ import numpy as np
 
 
 def main():
-    input_filename = 'inputs/01.txt'
+    input_filename = '2022/inputs/01.txt'
     input = []
     with open(input_filename) as f:
         text = f.read()

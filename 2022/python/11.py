@@ -52,58 +52,25 @@ class Monkey:
             return self.false_target
 
     def mem_optim(self, item):
-        return item % self.test_val
-
-
-temp = [
-    'Monkey 0:',
-    'Starting items: 79, 98',
-    'Operation: new = old * 19',
-    'Test: divisible by 23',
-    '    If true: throw to monkey 2',
-    '    If false: throw to monkey 3',
-    '',
-    'Monkey 1:',
-    'Starting items: 54, 65, 75, 74',
-    'Operation: new = old + 6',
-    'Test: divisible by 19',
-    '    If true: throw to monkey 2',
-    '    If false: throw to monkey 0',
-    '',
-    'Monkey 2:',
-    'Starting items: 79, 60, 97',
-    'Operation: new = old * old',
-    'Test: divisible by 13',
-    '    If true: throw to monkey 1',
-    '    If false: throw to monkey 3',
-    '',
-    'Monkey 3:',
-    'Starting items: 74',
-    'Operation: new = old + 3',
-    'Test: divisible by 17',
-    '    If true: throw to monkey 0',
-    '    If false: throw to monkey 1',
-    '',
-]
+        return item % self.test_val_prod
 
 
 def monkey_shenanigans(input_filename, n_rounds, inspect_worry_div):
     monkeys = []
     with open(input_filename) as f:
         lines = []
-        # for line in f:
-        for line in temp:
+        for line in f:
             if line.strip() == '':
                 monkeys.append(Monkey(lines, inspect_worry_div))
                 lines = []
             else:
                 lines.append(line.strip())
-
         test_val_prod = 1
         for monkey in monkeys:
             test_val_prod *= monkey.test_val
         for monkey in monkeys:
             monkey.test_val_prod = test_val_prod
+
         inspect_count_list = [0] * len(monkeys)
         for i in range(n_rounds):
             for j, monkey in enumerate(monkeys):
@@ -112,18 +79,14 @@ def monkey_shenanigans(input_filename, n_rounds, inspect_worry_div):
                 for _ in range(n):
                     item = monkey.items.pop(0)
                     monkey.throw(monkeys, item)
-            if i in [0, 19, 999, 1999, 2999, 3999]:
-                print(inspect_count_list)
 
-    print(inspect_count_list)
     inspect_count_list.sort(reverse=True)
-    print(inspect_count_list)
     result = inspect_count_list[0] * inspect_count_list[1]
     return result
 
 
 def main():
-    input_filename = 'inputs/11.txt'
+    input_filename = '2022/inputs/11.txt'
     n_rounds = 20
     inspect_worry_div = 3
     result1 = monkey_shenanigans(input_filename, n_rounds, inspect_worry_div)

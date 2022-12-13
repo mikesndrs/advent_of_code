@@ -18,7 +18,7 @@ def beep(text, n):
 
 
 def main():
-    input_filename = 'inputs/06.txt'
+    input_filename = '2022/inputs/06.txt'
     with open(input_filename) as f:
         text = f.read()
         result1 = beep(text, 4)

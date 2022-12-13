@@ -1,5 +1,5 @@
 def main():
-    input_filename = 'inputs/05.txt'
+    input_filename = '2022/inputs/05.txt'
     with open(input_filename) as f:
         crate_lines = []
         for line in f:

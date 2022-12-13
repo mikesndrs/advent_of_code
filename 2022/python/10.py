@@ -20,7 +20,7 @@ func_dict = {
 
 
 def main():
-    input_filename = 'inputs/10.txt'
+    input_filename = '2022/inputs/10.txt'
     with open(input_filename) as f:
         i = 0
         x = 1

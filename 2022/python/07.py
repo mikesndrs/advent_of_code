@@ -1,5 +1,5 @@
 def main():
-    input_filename = "inputs/07.txt"
+    input_filename = "2022/inputs/07.txt"
     with open(input_filename) as f:
         max_size = 100000
         total_size_dic = {}

@@ -34,7 +34,7 @@ def calc_trail(input_filename, n_knots, dir_dict):
 
 
 def main():
-    input_filename = 'inputs/09.txt'
+    input_filename = '2022/inputs/09.txt'
     n_knots = 2
     result1 = len(calc_trail(input_filename, n_knots, dir_dict))
     print(result1)
