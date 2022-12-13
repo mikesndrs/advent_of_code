@@ -27,7 +27,7 @@ def viable_path(grid, visited_list, row, col, dir):
     return True
 
 
-def explore_path(input_filename, subproblem):
+def explore_path(input_filename, viable_starter):
     grid = []
     reach_grid = []
     visited_list = []
@@ -40,10 +40,7 @@ def explore_path(input_filename, subproblem):
                 reach_grid.append([None for char in line.strip()])
     for row, line in enumerate(grid):
         for col, char in enumerate(line):
-            if any([
-                subproblem == 1 and char == 'S',
-                subproblem == 2 and height(char) == 1,
-            ]):
+            if viable_starter(char):
                 visited_list.append([row, col])
                 latest_list.append([row, col])
                 reach_grid[row][col] = 0
@@ -69,9 +66,15 @@ def explore_path(input_filename, subproblem):
 
 def main():
     input_filename = '2022/inputs/12.txt'
-    result1 = explore_path(input_filename, subproblem=1)
+    result1 = explore_path(
+        input_filename,
+        viable_starter=lambda char: char == 'S'
+    )
     print(result1)
-    result2 = explore_path(input_filename, subproblem=2)
+    result2 = explore_path(
+        input_filename,
+        viable_starter=lambda char: height(char) == 1
+    )
     print(result2)
 
 
