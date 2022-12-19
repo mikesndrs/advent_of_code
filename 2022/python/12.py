@@ -27,7 +27,7 @@ def viable_path(grid, visited_list, row, col, dir):
     return True
 
 
-def explore_path(input_filename, viable_starter):
+def explore_path(input_filename, viable_starter=lambda char: char == 'S'):
     grid = []
     reach_grid = []
     visited_list = []
@@ -68,7 +68,6 @@ def main():
     input_filename = '2022/inputs/12.txt'
     result1 = explore_path(
         input_filename,
-        viable_starter=lambda char: char == 'S'
     )
     print(result1)
     result2 = explore_path(
