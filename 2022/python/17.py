@@ -9,8 +9,7 @@ rockshapes_list = [
 input_filename = "2022/inputs/17.txt"
 starting_position = [2, 4]
 x_bounds = [0, 6]
-n_rocks = 2022
-rock_pile = [[x, 0] for x in range(x_bounds[0], x_bounds[1] + 1)]
+width = x_bounds[1] + x_bounds[0] + 1
 
 
 def gust():
@@ -33,12 +32,12 @@ def rock_shapes():
         i = (i + 1) % n
 
 
-def main():
+def main(n_rocks):
+    rock_pile = [[x, 0] for x in range(x_bounds[0], x_bounds[1] + 1)]
     highest_rock = 0
     gust_gen = gust()
     rock_shapes_gen = rock_shapes()
     for rock_i in range(n_rocks):
-        # for rock_i in range(5):
         falling_rock = next(rock_shapes_gen)
         for i, (x, y) in enumerate(falling_rock):
             falling_rock[i] = [
@@ -49,6 +48,7 @@ def main():
         max_x = max([x[0] for x in falling_rock])
         falling = True
         while falling:
+            # blow horizontally
             gust_dir = next(gust_gen)
             if all(
                 [
@@ -63,16 +63,23 @@ def main():
                     falling_rock[i][0] = x + gust_dir
                 min_x = min([x[0] for x in falling_rock])
                 max_x = max([x[0] for x in falling_rock])
+            # fall vertically
             for i, (x, y) in enumerate(falling_rock):
                 if [x, y - 1] in rock_pile:
                     falling = False
-            if not falling:
+            if falling:
+                for i, (x, y) in enumerate(falling_rock):
+                    falling_rock[i][1] -= 1
+            else:
                 for x in falling_rock:
                     rock_pile.append(x)
                 highest_rock = max(highest_rock, max([x[1] for x in falling_rock]))
-            else:
-                for i, (x, y) in enumerate(falling_rock):
-                    falling_rock[i][1] -= 1
+                # remove from list
+                for y in range(highest_rock):
+                    if len([x for rock in rock_pile if rock[1] == y]) == width:
+                        highest_full_y = y
+                rock_pile = list(filter(lambda rock: rock[1] >= highest_full_y, rock_pile))
+
     print(highest_rock)
 
 
@@ -94,4 +101,7 @@ def print_rocks(rock_pile, falling_rock, highest_rock):
 
 
 if __name__ == "__main__":
-    main()
+    n_rocks = 2022
+    main(n_rocks)
+    # n_rocks = int(1e12)
+    # main(n_rocks)
