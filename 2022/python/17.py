@@ -17,12 +17,11 @@ width = x_bounds[1] + x_bounds[0] + 1
 def gust():
     with open(input_filename) as f:
         line = f.readlines()[0].strip()
-        # line = ">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>"
         n = len(line)
     gust_dir = {"<": -1, ">": 1}
     i = 0
     while True:
-        yield gust_dir[line[i]]
+        yield [gust_dir[line[i]], (i + 1) % n]
         i = (i + 1) % n
 
 
@@ -30,7 +29,7 @@ def rock_shapes():
     i = 0
     n = len(rockshapes_list)
     while True:
-        yield rockshapes_list[i].copy()
+        yield [rockshapes_list[i].copy(), (i + 1) % n]
         i = (i + 1) % n
 
 
@@ -39,9 +38,12 @@ def main(n_rocks):
     rock_pile = [[True] * width]
     gust_gen = gust()
     rock_shapes_gen = rock_shapes()
-    gust_i = 0
-    for rock_i in range(n_rocks):
-        falling_rock = next(rock_shapes_gen)
+    rep_list = []
+    rep_list_2 = []
+    rock_i = 0
+    jumped = False
+    while rock_i < n_rocks:
+        falling_rock, rock_shapes_i = next(rock_shapes_gen)
         highest_rock = max([i for i, x in enumerate(rock_pile) if any(x)])
         while len(rock_pile) < highest_rock + starting_position[1] + 4:
             rock_pile.append([False] * width)
@@ -53,8 +55,7 @@ def main(n_rocks):
         falling = True
         while falling:
             # blow horizontally
-            gust_dir = next(gust_gen)
-            gust_i += 1
+            gust_dir, gust_i = next(gust_gen)
             if all(
                 [
                     min([x[0] for x in falling_rock]) + gust_dir >= x_bounds[0],
@@ -62,7 +63,7 @@ def main(n_rocks):
                 ]
             ):
                 if all(
-                    [rock_pile[y][x + gust_dir] == False for (x, y) in falling_rock]
+                    [rock_pile[y][x + gust_dir] is False for (x, y) in falling_rock]
                 ):
                     for i, (x, y) in enumerate(falling_rock):
                         falling_rock[i][0] = x + gust_dir
@@ -78,9 +79,20 @@ def main(n_rocks):
                     rock_pile[y][x] = True
                 # remove from list
                 beep = max([i for i, x in enumerate(rock_pile) if all(x)])
+                if beep > 0:
+                    if [beep, gust_i, rock_shapes_i] in rep_list and jumped is False:
+                        rep_idx = rep_list.index([beep, gust_i, rock_shapes_i])
+                        rep_n = rock_i - rep_list_2[rep_idx]
+                        boop = (n_rocks - rock_i) // rep_n
+                        rm_ctr += boop * sum([x[0] for x in rep_list[rep_idx:]])
+                        rock_i += boop * rep_n
+                        jumped = True
+                    rep_list.append([beep, gust_i, rock_shapes_i])
+                    rep_list_2.append(rock_i)
                 del rock_pile[:beep]
                 rm_ctr += beep
                 highest_rock = max([i for i, x in enumerate(rock_pile) if any(x)])
+        rock_i += 1
     print(np.int64(rm_ctr + highest_rock))
 
 
@@ -90,7 +102,7 @@ def print_rocks(rock_pile, falling_rock, highest_rock):
             "".join(
                 [
                     "#"
-                    if rock_pile[y][x] == True
+                    if rock_pile[y][x] is True
                     else "$"
                     if [x, y] in falling_rock
                     else "."
