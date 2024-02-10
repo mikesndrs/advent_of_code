@@ -23,18 +23,15 @@ digit_strings = {
 
 
 def char_in_line(line, reversed=False):
-  line = line[::-1]
-  for char in line:
+  direction = -1 if reversed else 1
+  for char in line[::direction]:
     if char.isdigit():
       return char
 
 
 def string_in_line(line, reversed=False):
-  if reversed:
-    beep = -1
-  else:
-    beep = 1
-  for idx in range(len(line))[::beep]:
+  direction = -1 if reversed else 1
+  for idx in range(len(line))[::direction]:
     for digit in digit_strings.keys():
       if idx + len(digit) < len(line) and line[idx: idx + len(digit)] == digit:
         return str(digit_strings[digit])
@@ -54,7 +51,9 @@ def get_sum_first_and_list(input_filename, func):
 def main():
     input_filename = '2023/inputs/01.txt'
 
+    # Part 1
     get_sum_first_and_list(input_filename, char_in_line)
+    # Part 2
     get_sum_first_and_list(input_filename, string_in_line)
 
 
