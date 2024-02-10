@@ -39,12 +39,11 @@ def string_in_line(line, reversed=False):
 
 def get_sum_first_and_list(input_filename, func):
     with open(input_filename) as f:
-      coord_list = []
+      result = 0
       for line in f:
         first = func(line)
         last = func(line, reversed=True)
-        coord_list.append(int(first + last))
-      result = sum(coord_list)
+        result += int(first + last)
       print(result)
 
 
