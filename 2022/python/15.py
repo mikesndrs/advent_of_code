@@ -24,16 +24,11 @@ def puzzle1():
             target_y_dist = abs(sy - target_row)
             if target_y_dist <= dist:
                 for x in range(
-                    sx - (dist - target_y_dist),
-                    sx + (dist - target_y_dist) + 1
+                    sx - (dist - target_y_dist), sx + (dist - target_y_dist) + 1
                 ):
                     beaconless_set.add(x)
     result1 = len(
-        [
-            x
-            for x in beaconless_set
-            if all([x not in sensor_set, x not in beacon_set])
-        ]
+        [x for x in beaconless_set if all([x not in sensor_set, x not in beacon_set])]
     )
     print(result1)
 

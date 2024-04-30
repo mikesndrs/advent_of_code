@@ -1,15 +1,19 @@
 def compare(a, b):
-    if a < b: return True
-    elif a == b: return 'tie'
-    elif a > b: return False
-    
+    if a < b:
+        return True
+    elif a == b:
+        return "tie"
+    elif a > b:
+        return False
+
 
 def is_sorted(list1, list2):
     if set([type(list1), type(list2)]) == {list}:
         min_length = min(len(list1), len(list2))
         for i in range(min_length):
             x = is_sorted(list1[i], list2[i])
-            if type(x) == bool: return x
+            if type(x) == bool:
+                return x
         return compare(len(list1), len(list2))
     elif set([type(list1), type(list2)]) == {int, list}:
         lists = []
@@ -19,26 +23,27 @@ def is_sorted(list1, list2):
             elif type(l) == list:
                 lists.append(l)
             else:
-                raise ValueError('Item is neither int nor list')
-                
+                raise ValueError("Item is neither int nor list")
+
         return is_sorted(*lists)
     elif set([type(list1), type(list2)]) == {int}:
         return compare(list1, list2)
 
-    raise ValueError('Should never reach this point')
+    raise ValueError("Should never reach this point")
 
 
 def main():
-    input_filename = '2022/inputs/13.txt'
+    input_filename = "2022/inputs/13.txt"
     with open(input_filename) as f:
         ctr = 0
         idx = 0
         lines = []
         for line in f:
             sl = line.strip()
-            if sl == '':
+            if sl == "":
                 idx += 1
-                if is_sorted(*lines): ctr += idx
+                if is_sorted(*lines):
+                    ctr += idx
                 lines = []
             else:
                 lines.append(eval(sl))
@@ -50,7 +55,7 @@ def main():
         packets = []
         for line in f:
             sl = line.strip()
-            if sl == '':
+            if sl == "":
                 pass
             else:
                 packets.append(eval(line.strip()))
@@ -68,5 +73,5 @@ def main():
     print(result2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

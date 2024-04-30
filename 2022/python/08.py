@@ -11,7 +11,7 @@ def viewing_distance(grid, tallest_tree):
 
 
 def main():
-    input_filename = '2022/inputs/08.txt'
+    input_filename = "2022/inputs/08.txt"
     with open(input_filename) as f:
         invisible_trees = 0
         grid = []
@@ -22,12 +22,14 @@ def main():
     for i in range(1, n - 1):
         for j in range(1, n - 1):
             val = grid[i, j]
-            if all([
-                val <= np.max(grid[: i, j]),
-                val <= np.max(grid[i + 1:, j]),
-                val <= np.max(grid[i, : j]),
-                val <= np.max(grid[i, j + 1:]),
-            ]):
+            if all(
+                [
+                    val <= np.max(grid[:i, j]),
+                    val <= np.max(grid[i + 1 :, j]),
+                    val <= np.max(grid[i, :j]),
+                    val <= np.max(grid[i, j + 1 :]),
+                ]
+            ):
                 invisible_trees += 1
 
     result1 = n**2 - invisible_trees
@@ -36,15 +38,17 @@ def main():
     result2 = 0
     for i in range(1, n - 1):
         for j in range(1, n - 1):
-            scenic_score = np.prod([
-                viewing_distance(np.flip(grid[: i, j]), grid[i, j]),
-                viewing_distance(grid[i + 1:, j], grid[i, j]),
-                viewing_distance(np.flip(grid[i, : j]), grid[i, j]),
-                viewing_distance(grid[i, j + 1:], grid[i, j]),
-            ])
+            scenic_score = np.prod(
+                [
+                    viewing_distance(np.flip(grid[:i, j]), grid[i, j]),
+                    viewing_distance(grid[i + 1 :, j], grid[i, j]),
+                    viewing_distance(np.flip(grid[i, :j]), grid[i, j]),
+                    viewing_distance(grid[i, j + 1 :], grid[i, j]),
+                ]
+            )
             result2 = max([result2, scenic_score])
     print(result2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

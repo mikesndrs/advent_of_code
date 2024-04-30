@@ -1,6 +1,6 @@
 op_dict = {
-    '+': (lambda val1, val2: val1 + val2),
-    '*': (lambda val1, val2: val1 * val2),
+    "+": (lambda val1, val2: val1 + val2),
+    "*": (lambda val1, val2: val1 * val2),
     # '-': (lambda val1, val2: val1 - val2),
     # '/': (lambda val1, val2: val1 / val2),
 }
@@ -8,15 +8,15 @@ op_dict = {
 
 class Monkey:
     def __init__(self, lines, inspect_worry_div):
-        self.name = lines[0].strip(':').split(' ')[-1]
+        self.name = lines[0].strip(":").split(" ")[-1]
         self.items = []
-        for item in lines[1].split(' ')[2:]:
-            self.items.append(int(item.strip(',')))
-        self.op = op_dict[lines[2].split(' ')[-2]]
-        self.vals = [lines[2].split(' ')[-3], lines[2].split(' ')[-1]]
-        self.test_val = int(lines[3].split(' ')[-1])
-        self.true_target = int(lines[4].split(' ')[-1])
-        self.false_target = int(lines[5].split(' ')[-1])
+        for item in lines[1].split(" ")[2:]:
+            self.items.append(int(item.strip(",")))
+        self.op = op_dict[lines[2].split(" ")[-2]]
+        self.vals = [lines[2].split(" ")[-3], lines[2].split(" ")[-1]]
+        self.test_val = int(lines[3].split(" ")[-1])
+        self.true_target = int(lines[4].split(" ")[-1])
+        self.false_target = int(lines[5].split(" ")[-1])
         self.inspect_worry_div = inspect_worry_div
         self.test_val_prod = 1
 
@@ -34,15 +34,15 @@ class Monkey:
         for i, val in enumerate(self.vals):
             if val.isnumeric():
                 vals.append(int(val))
-            elif val == 'old':
+            elif val == "old":
                 vals.append(item)
             else:
-                raise ValueError('Unexpected argument')
+                raise ValueError("Unexpected argument")
         item = self.op(*vals)
         return item
 
     def bored(self, item):
-        item = int(item/self.inspect_worry_div)
+        item = int(item / self.inspect_worry_div)
         return item
 
     def test(self, item):
@@ -60,7 +60,7 @@ def monkey_shenanigans(input_filename, n_rounds, inspect_worry_div):
     with open(input_filename) as f:
         lines = []
         for line in f:
-            if line.strip() == '':
+            if line.strip() == "":
                 monkeys.append(Monkey(lines, inspect_worry_div))
                 lines = []
             else:
@@ -86,7 +86,7 @@ def monkey_shenanigans(input_filename, n_rounds, inspect_worry_div):
 
 
 def main():
-    input_filename = '2022/inputs/11.txt'
+    input_filename = "2022/inputs/11.txt"
     n_rounds = 20
     inspect_worry_div = 3
     result1 = monkey_shenanigans(input_filename, n_rounds, inspect_worry_div)
@@ -97,5 +97,5 @@ def main():
     print(result2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -2,14 +2,14 @@ import numpy as np
 
 
 def main():
-    input_filename = '2022/inputs/01.txt'
+    input_filename = "2022/inputs/01.txt"
     input = []
     with open(input_filename) as f:
         text = f.read()
-        lists = text.split('\n\n')
+        lists = text.split("\n\n")
         for list in lists:
-            mini_list = list.split('\n')
-            int_mini_list = [int(x) for x in mini_list if x != '']
+            mini_list = list.split("\n")
+            int_mini_list = [int(x) for x in mini_list if x != ""]
             input.append(int_mini_list)
 
     calories_list = [np.sum(np.array(elf)) for elf in input]
@@ -23,5 +23,5 @@ def main():
     print(result2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

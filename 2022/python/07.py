@@ -38,7 +38,7 @@ def main():
         print(result1)
         total_disk_space = 70000000
         needed_space = 30000000
-        root_size = total_size_dic['root']
+        root_size = total_size_dic["root"]
         space_to_delete = needed_space - (total_disk_space - root_size)
         eligible_dirs = [
             x for x in list(total_size_dic.values()) if x >= space_to_delete

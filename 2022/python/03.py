@@ -2,19 +2,19 @@ import numpy as np
 
 
 def main():
-    input_filename = '2022/inputs/03.txt'
+    input_filename = "2022/inputs/03.txt"
     with open(input_filename) as f:
         text = f.read()
-        lists = text.split('\n')
+        lists = text.split("\n")
         input = [x for x in lists[:-1]]
 
-    item_priorities = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    item_priorities.index('D')+1
+    item_priorities = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    item_priorities.index("D") + 1
 
     priority_list = []
     for rucksack in input:
-        compartment1 = rucksack[:int(len(rucksack)/2)]
-        compartment2 = rucksack[int(len(rucksack)/2):]
+        compartment1 = rucksack[: int(len(rucksack) / 2)]
+        compartment2 = rucksack[int(len(rucksack) / 2) :]
         for item in compartment1:
             if item in compartment2:
                 priority_list.append(item_priorities.index(item) + 1)
@@ -26,8 +26,8 @@ def main():
     # 2022_12_03 2nd puzzle
     group_size = 3
     input = [
-        input[group_size*i:group_size*(i+1)]
-        for i in range(int(len(input)/group_size))
+        input[group_size * i : group_size * (i + 1)]
+        for i in range(int(len(input) / group_size))
     ]
 
     priority_list = []
@@ -41,5 +41,5 @@ def main():
     print(result2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

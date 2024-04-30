@@ -22,11 +22,7 @@ def main():
             valve_name = match.group(1)
             flow_rate = int(match.group(2))
             connected_tunnels = match.group(3).split(", ")
-            rooms.append(
-                volcano_room(
-                    valve_name, flow_rate, connected_tunnels
-                )
-            )
+            rooms.append(volcano_room(valve_name, flow_rate, connected_tunnels))
 
 
 if __name__ == "__main__":
