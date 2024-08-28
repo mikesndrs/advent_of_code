@@ -8,24 +8,23 @@ def get_project_root() -> Path:
 
 
 @click.command()
-@click.argument("year")
-@click.argument("number")
-def run(year, number):
+@click.argument("year", type=int)
+@click.argument("number", type=int)
+def run(year: int, number: int):
     """Run exercise for a given year and number"""
     print(f"run {year} {number}")
 
 
 @click.command()
-@click.argument("year")
-@click.argument("number")
-@click.option("--language", default="python", help="Number of exercise")
-def init(year, number, language):
+@click.argument("year", type=int)
+@click.argument("number", type=int)
+@click.option("--language", default="python", help="Programming language", type=str)
+def init(year: int, number: int, language: str):
     """Initialize all the necessary files for a given year and number"""
     print(f"init {year} {number}")
     root = get_project_root()
     base = root / "aoc" / f"aoc_{year}"
     template_base = root / "aoc" / "templates"
-    # code
     for filename, template_name in [
         (base / "python" / f"ex_{number:02}.py", "code.py"),
         (base / "inputs" / f"{number:02}.txt", None),
@@ -36,8 +35,8 @@ def init(year, number, language):
             if template_name is not None:
                 with open(template_base / template_name) as f:
                     content = f.read()
-                content = content.replace("<year>", year)
-                content = content.replace("<number>", number)
+                content = content.replace("<year>", str(year))
+                content = content.replace("<number>", str(number))
                 with open(filename, mode="w") as f:
                     f.write(content)
             else:
