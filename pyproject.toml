@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aoc"
+version = "0.1"
+dependencies = ["click"]
+
+[project.scripts]
+aoc = "aoc.aoc_cli:cli"
+
+[tool.black]
+# Exclude templates
+force-exclude = 'templates/*'
