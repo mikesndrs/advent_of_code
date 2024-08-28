@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2022/day/18"""
+
+
 def main(input_filename):
     # get bounds
     with open(input_filename) as f:

@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2023/day/9"""
+
+
 def sum_next_entry(filename: str, version: int = 1) -> int:
     with open(filename) as f:
         res = 0

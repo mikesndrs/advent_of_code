@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2023/day/7"""
+
+
 card_strength = {
     "2": 2,
     "3": 3,

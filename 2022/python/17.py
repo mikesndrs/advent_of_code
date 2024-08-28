@@ -1,3 +1,4 @@
+"""https://adventofcode.com/2022/day/17"""
 import numpy as np
 
 rockshapes_list = [

@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2022/day/10"""
+
+
 def noop(x, cycle, add):
     cycle += 1
     if cycle >= 1:

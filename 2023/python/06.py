@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2023/day/6"""
+
+
 def list_from_line(line, version):
     preprocessed_line = line.split(":")[1].strip().split(" ")
     int_list = [x.strip() for x in preprocessed_line if len(x) > 0]

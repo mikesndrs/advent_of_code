@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2023/day/3"""
+
+
 def sum_part_engines(input_filename):
     num_list, sym_list = get_num_and_sym_list(input_filename)
     result = 0

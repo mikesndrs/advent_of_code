@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2022/day/6"""
+
+
 def beep(text, n):
     nbrs = n - 1
     skip_until = -1

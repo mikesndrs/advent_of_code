@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2022/day/11"""
+
+
 op_dict = {
     "+": (lambda val1, val2: val1 + val2),
     "*": (lambda val1, val2: val1 * val2),

@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2022/day/14"""
+
+
 def build_grid():
     input_filename = "2022/inputs/14.txt"
     with open(input_filename) as f:

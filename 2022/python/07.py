@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2022/day/7"""
+
+
 def main():
     input_filename = "2022/inputs/07.txt"
     with open(input_filename) as f:

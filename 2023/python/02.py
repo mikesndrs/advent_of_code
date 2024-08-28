@@ -1,3 +1,6 @@
+"""https://adventofcode.com/2023/day/2"""
+
+
 def prep_line(line):
     split_line = line.split(":")
     id = int(split_line[0].split(" ")[-1])
