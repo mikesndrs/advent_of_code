@@ -31,9 +31,9 @@ def init(year: int, number: int, language: str):
         (base / "inputs" / f"{number:02}_test.txt", None),
         (base / "python" / "tests" / f"test_{number:02}.py", "test.py"),
     ]:
-        if not Path.exists(filename):
+        if not filename.exists():
             if template_name is not None:
-                with open(template_base / template_name) as f:
+                with open(template_base / template_name, mode="r") as f:
                     content = f.read()
                 content = content.replace("<year>", str(year))
                 content = content.replace("<number>", str(number))
