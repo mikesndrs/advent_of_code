@@ -1,8 +1,8 @@
 """https://adventofcode.com/2022/day/5"""
 
 
-def main():
-    input_filename = "2022/inputs/05.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2022/inputs/05.txt"
     with open(input_filename) as f:
         crate_lines = []
         for line in f:

@@ -1,7 +1,7 @@
 """https://adventofcode.com/2023/day/5"""
 
 
-def mapping_chain(input_filename, version):
+def mapping_chain(input_filename: str, version: int) -> int:
     seeds, maps = handle_inputs(input_filename, version)
     values = seeds.copy()
     for map in maps:
@@ -11,7 +11,7 @@ def mapping_chain(input_filename, version):
     return result
 
 
-def apply_map(map, values):
+def apply_map(map: list[list[int]], values: list[list[int]]):
     new_values = values.copy()
     result_values = []
     for dest, source, length in map:
@@ -41,7 +41,9 @@ def apply_map(map, values):
     return result_values
 
 
-def handle_inputs(input_filename, version):
+def handle_inputs(
+    input_filename: str, version: int
+) -> tuple[list[list[int]], list[list[int]]]:
     with open(input_filename) as f:
         sections = f.read().split("\n\n")
         seed_section = sections[0].split(":")[-1].strip().split(" ")
@@ -62,13 +64,13 @@ def handle_inputs(input_filename, version):
         return seeds, maps
 
 
-def main():
+def main() -> int:
     # Part 1
-    assert mapping_chain("2023/inputs/05_test.txt", 1) == 35
-    assert mapping_chain("2023/inputs/05.txt", 1) == 214922730
+    assert mapping_chain("aoc/aoc_2023/inputs/05_test.txt", 1) == 35
+    assert mapping_chain("aoc/aoc_2023/inputs/05.txt", 1) == 214922730
     # Part 2
-    assert mapping_chain("2023/inputs/05_test.txt", 2) == 46
-    assert mapping_chain("2023/inputs/05.txt", 2) == 148041808
+    assert mapping_chain("aoc/aoc_2023/inputs/05_test.txt", 2) == 46
+    assert mapping_chain("aoc/aoc_2023/inputs/05.txt", 2) == 148041808
 
 
 if __name__ == "__main__":

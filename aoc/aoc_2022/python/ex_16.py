@@ -1,4 +1,5 @@
 """https://adventofcode.com/2022/day/16"""
+
 import re
 
 
@@ -14,7 +15,7 @@ class volcano_room:
 
 
 def main():
-    input_filename = "2022/inputs/16.txt"
+    input_filename = "aoc/aoc_2022/inputs/16.txt"
     match_line = "Valve (.*) has flow rate=(.*); tunnels lead to valves (.*)"
     rooms = []
     with open(input_filename) as f:

@@ -1,6 +1,5 @@
 """https://adventofcode.com/2022/day/11"""
 
-
 op_dict = {
     "+": (lambda val1, val2: val1 + val2),
     "*": (lambda val1, val2: val1 * val2),
@@ -10,7 +9,7 @@ op_dict = {
 
 
 class Monkey:
-    def __init__(self, lines, inspect_worry_div):
+    def __init__(self, lines: list[str], inspect_worry_div: int) -> None:
         self.name = lines[0].strip(":").split(" ")[-1]
         self.items = []
         for item in lines[1].split(" ")[2:]:
@@ -23,7 +22,7 @@ class Monkey:
         self.inspect_worry_div = inspect_worry_div
         self.test_val_prod = 1
 
-    def throw(self, monkeys, item):
+    def throw(self, monkeys: list["Monkey"], item: int) -> None:
         item = self.inspect(item)
         if self.inspect_worry_div is not None:
             item = self.bored(item)
@@ -32,7 +31,7 @@ class Monkey:
         target = self.test(item)
         monkeys[target].items.append(item)
 
-    def inspect(self, item):
+    def inspect(self, item: int) -> int:
         vals = []
         for i, val in enumerate(self.vals):
             if val.isnumeric():
@@ -44,21 +43,23 @@ class Monkey:
         item = self.op(*vals)
         return item
 
-    def bored(self, item):
+    def bored(self, item: int) -> int:
         item = int(item / self.inspect_worry_div)
         return item
 
-    def test(self, item):
+    def test(self, item: int) -> int:
         if item % self.test_val == 0:
             return self.true_target
         else:
             return self.false_target
 
-    def mem_optim(self, item):
+    def mem_optim(self, item: int) -> int:
         return item % self.test_val_prod
 
 
-def monkey_shenanigans(input_filename, n_rounds, inspect_worry_div):
+def monkey_shenanigans(
+    input_filename: str, n_rounds: int, inspect_worry_div: int
+) -> int:
     monkeys = []
     with open(input_filename) as f:
         lines = []
@@ -88,8 +89,8 @@ def monkey_shenanigans(input_filename, n_rounds, inspect_worry_div):
     return result
 
 
-def main():
-    input_filename = "2022/inputs/11.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2022/inputs/11.txt"
     n_rounds = 20
     inspect_worry_div = 3
     result1 = monkey_shenanigans(input_filename, n_rounds, inspect_worry_div)

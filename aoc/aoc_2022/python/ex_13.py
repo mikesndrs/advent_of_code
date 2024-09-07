@@ -1,7 +1,7 @@
 """https://adventofcode.com/2022/day/13"""
 
 
-def compare(a, b):
+def compare(a: int, b: int) -> bool:
     if a < b:
         return True
     elif a == b:
@@ -10,21 +10,21 @@ def compare(a, b):
         return False
 
 
-def is_sorted(list1, list2):
+def is_sorted(list1: list[int], list2: list[int]) -> bool:
     if set([type(list1), type(list2)]) == {list}:
         min_length = min(len(list1), len(list2))
         for i in range(min_length):
             x = is_sorted(list1[i], list2[i])
-            if type(x) == bool:
+            if isinstance(x, bool):
                 return x
         return compare(len(list1), len(list2))
     elif set([type(list1), type(list2)]) == {int, list}:
         lists = []
-        for l in [list1, list2]:
-            if type(l) == int:
-                lists.append([l])
-            elif type(l) == list:
-                lists.append(l)
+        for lst in [list1, list2]:
+            if isinstance(lst, int):
+                lists.append([lst])
+            elif isinstance(lst, list):
+                lists.append(lst)
             else:
                 raise ValueError("Item is neither int nor list")
 
@@ -35,8 +35,8 @@ def is_sorted(list1, list2):
     raise ValueError("Should never reach this point")
 
 
-def main():
-    input_filename = "2022/inputs/13.txt"
+def main() -> int:
+    input_filename = "aoc/aoc_2022/inputs/13.txt"
     with open(input_filename) as f:
         ctr = 0
         idx = 0

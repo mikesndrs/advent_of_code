@@ -34,11 +34,11 @@ def prev_entry(arr: list) -> int:
 
 def main() -> None:
     # Part 1
-    assert sum_next_entry("2023/inputs/09_test.txt", 1) == 114
-    assert sum_next_entry("2023/inputs/09.txt", 1) == 1637452029
+    assert sum_next_entry("aoc/aoc_2023/inputs/09_test.txt", 1) == 114
+    assert sum_next_entry("aoc/aoc_2023/inputs/09.txt", 1) == 1637452029
     # Part 2
-    assert sum_next_entry("2023/inputs/09_test.txt", 2) == 2
-    assert sum_next_entry("2023/inputs/09.txt", 2) == 908
+    assert sum_next_entry("aoc/aoc_2023/inputs/09_test.txt", 2) == 2
+    assert sum_next_entry("aoc/aoc_2023/inputs/09.txt", 2) == 908
 
 
 if __name__ == "__main__":

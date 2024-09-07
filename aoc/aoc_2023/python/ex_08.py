@@ -1,6 +1,5 @@
 """https://adventofcode.com/2023/day/8"""
 
-
 # TODO: FINISH actual exercise since the answer is not to the actual question
 LR_dict = {
     "L": 0,
@@ -8,17 +7,17 @@ LR_dict = {
 }
 
 
-def pattern_divide_func(pattern):
+def pattern_divide_func(pattern: str) -> str:
     for i in reversed(range(2, len(pattern) // 2)):
         if len(pattern) % i == 0:
-            pat1 = pattern[0 : i + 1]
+            pat1 = pattern[: i + 1]
             pats = [pattern[j * i : (j + 1) * i + 1] for j in range(len(pattern) // i)]
             if all([pat == pat1 for pat in pats]):
                 pattern = pat1
     return pattern
 
 
-def handle_input(input_filename):
+def handle_input(input_filename: str) -> tuple[str, dict]:
     with open(input_filename) as f:
         lines = f.readlines()
         pattern = lines[0].strip()
@@ -33,7 +32,7 @@ def handle_input(input_filename):
     return pattern, network
 
 
-def follow_network(pattern, network):
+def follow_network(pattern: str, network: dict) -> int:
     pattern_len = len(pattern)
     val = "AAA"
     res = 0
@@ -44,7 +43,7 @@ def follow_network(pattern, network):
 
 
 # {start_val, [[z_vals] [start_pattern_idx, pattern_rep_freq]]}
-def get_occ_list(pattern, network):
+def get_occ_list(pattern: str, network: dict) -> dict:
     vals = list(filter(lambda x: x[-1] == "A", list(network.keys())))
     pattern_len = len(pattern)
     occ_list = {}
@@ -52,7 +51,7 @@ def get_occ_list(pattern, network):
         val_i = val
         ctr = 0
         iter = 0
-        seen_vals = {}
+        seen_vals: dict[int, dict[int, int]] = {}
         while True:
             val_i = network[val_i][LR_dict[pattern[ctr]]]
             ctr += 1
@@ -73,7 +72,7 @@ def get_occ_list(pattern, network):
     return occ_list
 
 
-def follow_network_ghost(pattern, network):
+def follow_network_ghost(pattern: str, network: dict) -> int:
     occ_list = get_occ_list(pattern, network)
     print(len(pattern))
     print(occ_list)
@@ -83,7 +82,7 @@ def follow_network_ghost(pattern, network):
     for i in range(len(pattern)):
         if all([i in occ_val[0].keys() for occ_val in occ_vals]):
             beep[i] = [(occ_val[0][i], occ_val[2]) for occ_val in occ_vals]
-    res = float("inf")
+    res = int(1e30)
     for key, val in beep.items():
         for x in val:
             print([((x[0] - y[0]) % y[1]) == 0 for y in val])
@@ -93,7 +92,7 @@ def follow_network_ghost(pattern, network):
     return res
 
 
-def steps_required(input_filename, version):
+def steps_required(input_filename: str, version: int) -> int:
     pattern, network = handle_input(input_filename)
     if version == 1:
         res = follow_network(pattern, network)
@@ -105,13 +104,13 @@ def steps_required(input_filename, version):
     return res
 
 
-def main():
+def main() -> None:
     # Part 1
-    assert steps_required("2023/inputs/08_test.txt", 1) == 6
-    assert steps_required("2023/inputs/08.txt", 1) == 23147
+    assert steps_required("aoc/aoc_2023/inputs/08_test.txt", 1) == 6
+    assert steps_required("aoc/aoc_2023/inputs/08.txt", 1) == 23147
     # Part 2
-    assert steps_required("2023/inputs/08_test_2.txt", 2) == 6
-    assert steps_required("2023/inputs/08.txt", 2) == 22289513667691
+    assert steps_required("aoc/aoc_2023/inputs/08_test_2.txt", 2) == 6
+    assert steps_required("aoc/aoc_2023/inputs/08.txt", 2) == 22289513667691
 
 
 if __name__ == "__main__":

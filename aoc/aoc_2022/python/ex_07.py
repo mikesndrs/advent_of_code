@@ -1,8 +1,8 @@
 """https://adventofcode.com/2022/day/7"""
 
 
-def main():
-    input_filename = "2022/inputs/07.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2022/inputs/07.txt"
     with open(input_filename) as f:
         max_size = 100000
         total_size_dic = {}

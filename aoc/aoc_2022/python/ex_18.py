@@ -41,9 +41,9 @@ def main(input_filename):
 
 
 if __name__ == "__main__":
-    input_filename = "2022/inputs/beep.txt"
+    input_filename = "aoc/aoc_2022/inputs/beep.txt"
     main(input_filename)
-    input_filename = "2022/inputs/18_test.txt"
+    input_filename = "aoc/aoc_2022/inputs/18_test.txt"
     main(input_filename)
-    input_filename = "2022/inputs/18.txt"
+    input_filename = "aoc/aoc_2022/inputs/18.txt"
     main(input_filename)

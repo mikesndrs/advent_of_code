@@ -1,5 +1,7 @@
 """https://adventofcode.com/2023/day/7"""
 
+HAND_DICT = dict[str, int]
+
 
 card_strength = {
     "2": 2,
@@ -31,8 +33,8 @@ type_strength = {
 }
 
 
-def get_hand_dict(hand):
-    nums = {}
+def get_hand_dict(hand: str) -> HAND_DICT:
+    nums: dict[str, int] = {}
     for char in hand:
         nums[char] = nums.get(char, 0) + 1
     sorted_hand = {
@@ -41,10 +43,11 @@ def get_hand_dict(hand):
             nums, key=lambda x: 100 * nums[x] + card_strength[x], reverse=True
         )
     }
+    print(sorted_hand)
     return sorted_hand
 
 
-def get_hand_type(hand_dict, version):
+def get_hand_type(hand_dict: HAND_DICT, version: int) -> str:
     if version == 2 and "J" in hand_dict.keys() and len(hand_dict) > 1:
         n_jokers = hand_dict.pop("J")
         key = list(hand_dict.keys())[0]
@@ -65,7 +68,7 @@ def get_hand_type(hand_dict, version):
         return "high card"
 
 
-def compare_hand_strengths(i, hands, version):
+def compare_hand_strengths(i: int, hands: list[str], version: int) -> tuple[int, ...]:
     hand_dict = get_hand_dict(hands[i])
     my_type_strength = type_strength[get_hand_type(hand_dict, version)]
     if version == 1:
@@ -76,7 +79,9 @@ def compare_hand_strengths(i, hands, version):
     return res
 
 
-def sort_by_hand_strength(hands, bids, version):
+def sort_by_hand_strength(
+    hands: list[str], bids: list[int], version: int
+) -> tuple[list[str], list[int]]:
     idcs = list(range(len(hands)))
     sorted_idcs = sorted(
         idcs, key=lambda i: compare_hand_strengths(i, hands, version), reverse=True
@@ -87,7 +92,7 @@ def sort_by_hand_strength(hands, bids, version):
     return sorted_hands, sorted_bids
 
 
-def total_winnings(input_filename, version):
+def total_winnings(input_filename: str, version: int) -> int:
     with open(input_filename) as f:
         hands = []
         bids = []
@@ -103,13 +108,13 @@ def total_winnings(input_filename, version):
     return result
 
 
-def main():
+def main() -> None:
     # Part 1
-    assert total_winnings("2023/inputs/07_test.txt", 1) == 6440
-    assert total_winnings("2023/inputs/07.txt", 1) == 251058093
+    assert total_winnings("aoc/aoc_2023/inputs/07_test.txt", 1) == 6440
+    assert total_winnings("aoc/aoc_2023/inputs/07.txt", 1) == 251058093
     # Part 2
-    assert total_winnings("2023/inputs/07_test.txt", 2) == 5905
-    assert total_winnings("2023/inputs/07.txt", 2) == 249781879
+    assert total_winnings("aoc/aoc_2023/inputs/07_test.txt", 2) == 5905
+    assert total_winnings("aoc/aoc_2023/inputs/07.txt", 2) == 249781879
 
 
 if __name__ == "__main__":

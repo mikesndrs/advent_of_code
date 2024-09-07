@@ -1,10 +1,11 @@
 """https://adventofcode.com/2022/day/15"""
+
 import re
 
 
 def puzzle1():
     target_row = 2000000
-    input_filename = "2022/inputs/15.txt"
+    input_filename = "aoc/aoc_2022/inputs/15.txt"
     beaconless_set = set()
     sensor_set = set()
     beacon_set = set()
@@ -35,7 +36,7 @@ def puzzle1():
 
 
 def puzzle2():
-    input_filename = "2022/inputs/15.txt"
+    input_filename = "aoc/aoc_2022/inputs/15.txt"
     match_line = "Sensor at x=(.*), y=(.*):"
     match_line += "closest beacon is at x=(.*), y=(.*)"
     with open(input_filename) as f:

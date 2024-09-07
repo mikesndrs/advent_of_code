@@ -1,7 +1,7 @@
 """https://adventofcode.com/2023/day/6"""
 
 
-def list_from_line(line, version):
+def list_from_line(line: str, version: int) -> list[int]:
     preprocessed_line = line.split(":")[1].strip().split(" ")
     int_list = [x.strip() for x in preprocessed_line if len(x) > 0]
     if version == 1:
@@ -10,7 +10,7 @@ def list_from_line(line, version):
         return [int("".join(int_list))]
 
 
-def count_winning_permutations(time, distance):
+def count_winning_permutations(time: int, distance: int) -> int:
     last_pos = 0
     j = round((time + 1) / 2) // 2
     step = j // 2
@@ -27,7 +27,7 @@ def count_winning_permutations(time, distance):
     return time + 1 - (2 * last_pos)
 
 
-def product_race_winners(input_filename, version):
+def product_race_winners(input_filename: str, version: int) -> int:
     with open(input_filename) as f:
         for line in f:
             if "Time" in line:
@@ -45,13 +45,13 @@ def product_race_winners(input_filename, version):
     return result
 
 
-def main():
+def main() -> None:
     # Part 1
-    assert product_race_winners("2023/inputs/06_test.txt", 1) == 288
-    assert product_race_winners("2023/inputs/06.txt", 1) == 211904
+    assert product_race_winners("aoc/aoc_2023/inputs/06_test.txt", 1) == 288
+    assert product_race_winners("aoc/aoc_2023/inputs/06.txt", 1) == 211904
     # Part 2
-    assert product_race_winners("2023/inputs/06_test.txt", 2) == 71503
-    assert product_race_winners("2023/inputs/06.txt", 2) == 43364472
+    assert product_race_winners("aoc/aoc_2023/inputs/06_test.txt", 2) == 71503
+    assert product_race_winners("aoc/aoc_2023/inputs/06.txt", 2) == 43364472
 
 
 if __name__ == "__main__":

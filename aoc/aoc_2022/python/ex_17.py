@@ -1,4 +1,7 @@
 """https://adventofcode.com/2022/day/17"""
+
+from collections.abc import Generator
+
 import numpy as np
 
 rockshapes_list = [
@@ -9,13 +12,13 @@ rockshapes_list = [
     [[0, 0], [0, 1], [1, 0], [1, 1]],
 ]
 
-input_filename = "2022/inputs/17.txt"
+input_filename = "aoc/aoc_2022/inputs/17.txt"
 starting_position = [2, 4]
 x_bounds = [0, 6]
 width = x_bounds[1] + x_bounds[0] + 1
 
 
-def gust():
+def gust() -> Generator:
     with open(input_filename) as f:
         line = f.readlines()[0].strip()
         n = len(line)
@@ -26,7 +29,7 @@ def gust():
         i = (i + 1) % n
 
 
-def rock_shapes():
+def rock_shapes() -> Generator:
     i = 0
     n = len(rockshapes_list)
     while True:
@@ -34,7 +37,7 @@ def rock_shapes():
         i = (i + 1) % n
 
 
-def main(n_rocks):
+def main(n_rocks: int) -> None:
     rm_ctr = np.int64(0)
     rock_pile = [[True] * width]
     gust_gen = gust()
@@ -70,7 +73,7 @@ def main(n_rocks):
                         falling_rock[i][0] = x + gust_dir
             # fall vertically
             for i, (x, y) in enumerate(falling_rock):
-                if rock_pile[y - 1][x] == True:
+                if rock_pile[y - 1][x]:
                     falling = False
             if falling:
                 for i, (x, y) in enumerate(falling_rock):
@@ -97,16 +100,16 @@ def main(n_rocks):
     print(np.int64(rm_ctr + highest_rock))
 
 
-def print_rocks(rock_pile, falling_rock, highest_rock):
+def print_rocks(rock_pile: list, falling_rock, highest_rock) -> None:
     for y in range(len(rock_pile) - 1, -1, -1):
         print(
             "".join(
                 [
-                    "#"
-                    if rock_pile[y][x] is True
-                    else "$"
-                    if [x, y] in falling_rock
-                    else "."
+                    (
+                        "#"
+                        if rock_pile[y][x] is True
+                        else "$" if [x, y] in falling_rock else "."
+                    )
                     for x in range(x_bounds[0], x_bounds[1] + 1)
                 ]
             )

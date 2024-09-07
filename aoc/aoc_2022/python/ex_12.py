@@ -1,10 +1,11 @@
 """https://adventofcode.com/2022/day/12"""
 
+from typing import Callable
 
 dir_list = [[0, 1], [1, 0], [-1, 0], [0, -1]]
 
 
-def height(char):
+def height(char: "str") -> int:
     if char.islower():
         height = ord(char) - ord("a") + 1
     elif char == "S":
@@ -14,7 +15,13 @@ def height(char):
     return height
 
 
-def viable_path(grid, visited_list, row, col, dir):
+def viable_path(
+    grid: list[int[int]],
+    visited_list: list[list[int]],
+    row: int,
+    col: int,
+    dir: list[int],
+) -> bool:
     row_t = row + dir[0]
     col_t = col + dir[1]
     if any(
@@ -32,7 +39,9 @@ def viable_path(grid, visited_list, row, col, dir):
     return True
 
 
-def explore_path(input_filename, viable_starter=lambda char: char == "S"):
+def explore_path(
+    input_filename: str, viable_starter: Callable = lambda char: char == "S"
+):
     grid = []
     reach_grid = []
     visited_list = []
@@ -69,8 +78,8 @@ def explore_path(input_filename, viable_starter=lambda char: char == "S"):
     raise Warning("Not found")
 
 
-def main():
-    input_filename = "2022/inputs/12.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2022/inputs/12.txt"
     result1 = explore_path(
         input_filename,
     )

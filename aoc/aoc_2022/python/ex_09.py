@@ -1,6 +1,5 @@
 """https://adventofcode.com/2022/day/9"""
 
-
 dir_dict = {
     "L": (0, -1),
     "R": (0, 1),
@@ -9,7 +8,7 @@ dir_dict = {
 }
 
 
-def calc_trail(input_filename, n_knots, dir_dict):
+def calc_trail(input_filename: str, n_knots: int, dir_dict: dict[str, tuple[int]]):
     pos = [[0, 0] for x in range(n_knots)]
     trail = set()
     trail.add(tuple(pos[-1]))
@@ -36,8 +35,8 @@ def calc_trail(input_filename, n_knots, dir_dict):
     return trail
 
 
-def main():
-    input_filename = "2022/inputs/09.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2022/inputs/09.txt"
     n_knots = 2
     result1 = len(calc_trail(input_filename, n_knots, dir_dict))
     print(result1)

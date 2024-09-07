@@ -1,5 +1,6 @@
 """https://adventofcode.com/2023/day/1"""
 
+from typing import Callable
 
 digit_strings = {
     "0": 0,
@@ -25,22 +26,24 @@ digit_strings = {
 }
 
 
-def char_in_line(line, reversed=False):
+def char_in_line(line: str, reversed: bool = False) -> str:
     direction = -1 if reversed else 1
     for char in line[::direction]:
         if char.isdigit():
             return char
+    return ""
 
 
-def string_in_line(line, reversed=False):
+def string_in_line(line: str, reversed: bool = False) -> str:
     direction = -1 if reversed else 1
     for idx in range(len(line))[::direction]:
         for digit in digit_strings.keys():
             if idx + len(digit) < len(line) and line[idx : idx + len(digit)] == digit:
                 return str(digit_strings[digit])
+    return ""
 
 
-def get_sum_first_and_list(input_filename, func):
+def get_sum_first_and_list(input_filename: str, func: Callable) -> None:
     with open(input_filename) as f:
         result = 0
         for line in f:
@@ -50,8 +53,8 @@ def get_sum_first_and_list(input_filename, func):
         print(result)
 
 
-def main():
-    input_filename = "2023/inputs/01.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2023/inputs/01.txt"
 
     # Part 1
     get_sum_first_and_list(input_filename, char_in_line)

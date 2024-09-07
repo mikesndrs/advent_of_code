@@ -1,9 +1,9 @@
 from distutils.dir_util import copy_tree
+from pathlib import Path
+from unittest.mock import patch
+
 import click.testing
 import pytest
-from unittest.mock import patch
-from pathlib import Path
-
 
 from aoc.aoc_cli import cli, get_project_root
 
@@ -23,6 +23,20 @@ def test_run_no_args(runner, tmpdir):
 def test_run_args(runner, tmpdir):
     """Test whether no arguments fails"""
     result = runner.invoke(cli, ["run", "2023", "8"])
+
+    assert result.exit_code == 0
+
+
+def test_profile_no_args(runner, tmpdir):
+    """Test whether no arguments fails"""
+    result = runner.invoke(cli, ["profile"])
+
+    assert result.exit_code > 0
+
+
+def test_profile_args(runner, tmpdir):
+    """Test whether no arguments fails"""
+    result = runner.invoke(cli, ["profile", "2023", "8"])
 
     assert result.exit_code == 0
 

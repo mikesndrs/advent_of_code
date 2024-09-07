@@ -1,7 +1,9 @@
 """https://adventofcode.com/2022/day/6"""
 
+from typing import Union
 
-def beep(text, n):
+
+def beep(text: str, n: int) -> Union[int, None]:
     nbrs = n - 1
     skip_until = -1
     for i in range(n - 1, len(text)):
@@ -20,8 +22,8 @@ def beep(text, n):
     return None
 
 
-def main():
-    input_filename = "2022/inputs/06.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2022/inputs/06.txt"
     with open(input_filename) as f:
         text = f.read()
         result1 = beep(text, 4)

@@ -1,7 +1,7 @@
 """https://adventofcode.com/2023/day/4"""
 
 
-def sum_of_points(input_filename, version):
+def sum_of_points(input_filename: str, version: int) -> int:
     result = 0
     card_counter = {}
     with open(input_filename) as f:
@@ -27,7 +27,7 @@ def sum_of_points(input_filename, version):
     return int(result)
 
 
-def get_inputs(line):
+def get_inputs(line: str) -> tuple[int, set[int], set[int]]:
     inputs = line.strip("\n").split(":")
     card_num = int(inputs[0].split(" ")[-1].strip())
     nums = inputs[1].split("|")
@@ -36,13 +36,13 @@ def get_inputs(line):
     return card_num, winning_nums, my_nums
 
 
-def main():
+def main() -> None:
     # Part 1
-    assert sum_of_points("2023/inputs/04_test.txt", 1) == 13
-    assert sum_of_points("2023/inputs/04.txt", 1) == 26914
+    assert sum_of_points("aoc/aoc_2023/inputs/04_test.txt", 1) == 13
+    assert sum_of_points("aoc/aoc_2023/inputs/04.txt", 1) == 26914
     # Part 2
-    assert sum_of_points("2023/inputs/04_test.txt", 2) == 30
-    assert sum_of_points("2023/inputs/04.txt", 2) == 13080971
+    assert sum_of_points("aoc/aoc_2023/inputs/04_test.txt", 2) == 30
+    assert sum_of_points("aoc/aoc_2023/inputs/04.txt", 2) == 13080971
 
 
 if __name__ == "__main__":

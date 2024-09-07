@@ -1,8 +1,9 @@
 """https://adventofcode.com/2022/day/8"""
+
 import numpy as np
 
 
-def viewing_distance(grid, tallest_tree):
+def viewing_distance(grid: list[int], tallest_tree: int) -> int:
     view_dist = 0
     for tree in grid:
         view_dist += 1
@@ -11,8 +12,8 @@ def viewing_distance(grid, tallest_tree):
     return view_dist
 
 
-def main():
-    input_filename = "2022/inputs/08.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2022/inputs/08.txt"
     with open(input_filename) as f:
         invisible_trees = 0
         grid = []

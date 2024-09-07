@@ -1,5 +1,4 @@
 import pytest
-
 from aoc_<year>.python.ex_<number> import main_func
 
 

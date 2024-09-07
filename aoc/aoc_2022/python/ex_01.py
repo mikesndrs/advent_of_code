@@ -1,9 +1,10 @@
 """https://adventofcode.com/2022/day/1"""
+
 import numpy as np
 
 
-def main():
-    input_filename = "2022/inputs/01.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2022/inputs/01.txt"
     input = []
     with open(input_filename) as f:
         text = f.read()

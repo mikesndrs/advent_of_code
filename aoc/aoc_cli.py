@@ -1,6 +1,8 @@
 """CLI commands"""
-import click
+
 from pathlib import Path
+
+import click
 
 
 def get_project_root() -> Path:
@@ -10,7 +12,7 @@ def get_project_root() -> Path:
 @click.command()
 @click.argument("year", type=int)
 @click.argument("number", type=int)
-def run(year: int, number: int):
+def run(year: int, number: int) -> None:
     """Run exercise for a given year and number"""
     print(f"run {year} {number}")
 
@@ -18,8 +20,16 @@ def run(year: int, number: int):
 @click.command()
 @click.argument("year", type=int)
 @click.argument("number", type=int)
+def profile(year: int, number: int) -> None:
+    """Profile exercise for a given year and number"""
+    print(f"profile {year} {number}")
+
+
+@click.command()
+@click.argument("year", type=int)
+@click.argument("number", type=int)
 @click.option("--language", default="python", help="Programming language", type=str)
-def init(year: int, number: int, language: str):
+def init(year: int, number: int, language: str) -> None:
     """Initialize all the necessary files for a given year and number"""
     print(f"init {year} {number}")
     root = get_project_root()
@@ -45,11 +55,12 @@ def init(year: int, number: int, language: str):
 
 
 @click.group()
-def cli():
+def cli() -> None:
     pass
 
 
 cli.add_command(run)
+cli.add_command(profile)
 cli.add_command(init)
 
 if __name__ == "__main__":

@@ -1,14 +1,14 @@
 """https://adventofcode.com/2022/day/10"""
 
 
-def noop(x, cycle, add):
+def noop(x: int, cycle: int, add: int) -> tuple[int, int]:
     cycle += 1
     if cycle >= 1:
         cycle = 0
     return x, cycle
 
 
-def addx(x, cycle, add):
+def addx(x: int, cycle: int, add: int) -> tuple[int, int]:
     cycle += 1
     if cycle >= 2:
         cycle = 0
@@ -22,8 +22,8 @@ func_dict = {
 }
 
 
-def main():
-    input_filename = "2022/inputs/10.txt"
+def main() -> None:
+    input_filename = "aoc/aoc_2022/inputs/10.txt"
     with open(input_filename) as f:
         i = 0
         x = 1

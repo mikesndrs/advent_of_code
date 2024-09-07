@@ -5,11 +5,69 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "aoc"
 version = "0.1"
-dependencies = ["click"]
+dependencies = [
+    "click",
+    "numpy>=1.15.4",
+    "importlib_resources",
+    "packaging",
+]
+
+[project.optional-dependencies]
+# these self-dependencies are available since pip 21.2
+all = [
+    "aoc[docs, test, linting]"
+]
+docs = [
+    "sphinx>=6.0.0,<7.0.0",
+    "sphinx-autosummary-accessors>=0.1.2",
+    "sphinx_immaterial",
+    "recommonmark>=0.6",
+]
+test = [
+    "pytest>=5.4.1",
+    "pytest-cov>=0.6",
+    "pytest-xdist",
+    "pytest-randomly",
+]
+linting = [
+    "black>=24,<25",
+    "flake8",
+    "mypy",
+    "isort",
+]
 
 [project.scripts]
 aoc = "aoc.aoc_cli:cli"
 
 [tool.black]
 # Exclude templates
+line-length = 88
 force-exclude = 'templates/*'
+
+[tool.mypy]
+packages = "aoc"
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_untyped_decorators = true
+exclude = [
+    "aoc/templates/*",
+    "aoc/aoc_2022/*",
+    "aoc/aoc_2023/python/ex_03.py",
+    "aoc/aoc_2023/python/ex_04.py",
+    "aoc/aoc_2023/python/ex_05.py",
+]
+
+[[tool.mypy.overrides]]
+module = [
+    "*.tests.*",
+]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = [
+    "numpy.*",
+]
+ignore_missing_imports = true
+
+[tool.isort]
+profile = "black"

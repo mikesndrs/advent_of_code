@@ -1,8 +1,8 @@
 """https://adventofcode.com/2022/day/14"""
 
 
-def build_grid():
-    input_filename = "2022/inputs/14.txt"
+def build_grid() -> None:
+    input_filename = "aoc/aoc_2022/inputs/14.txt"
     with open(input_filename) as f:
         rock_set = set()
         for line in f:
@@ -24,7 +24,7 @@ def build_grid():
     return rock_set
 
 
-def sand(version=1):
+def sand(version: int = 1) -> None:
     rock_set = build_grid()
     sand_spawn = [500, 0]
     lowest_rock = max([rock[1] for rock in rock_set])
@@ -54,7 +54,7 @@ def sand(version=1):
     raise ValueError("Didn't work :(")
 
 
-def main():
+def main() -> None:
     result1 = sand()
     print(result1)
     result2 = sand(version=2)
