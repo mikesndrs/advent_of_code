@@ -11,7 +11,7 @@ def prep_line(line: str) -> Tuple[int, List[str]]:
 
 
 def get_max_occ(subsets: List[str]) -> Dict:
-    max_occ: dict[str, int] = {}
+    max_occ: Dict[str, int] = {}
     for subset in subsets:
         for color_occ in subset.split(","):
             occ = int(color_occ.strip().split(" ")[0])
