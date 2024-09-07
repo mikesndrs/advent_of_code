@@ -1,12 +1,8 @@
 """CLI commands"""
 
-from pathlib import Path
-
 import click
 
-
-def get_project_root() -> Path:
-    return Path(__file__).resolve().parent.parent
+from aoc import get_project_root
 
 
 @click.command()

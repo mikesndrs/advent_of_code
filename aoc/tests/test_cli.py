@@ -5,7 +5,8 @@ from unittest.mock import patch
 import click.testing
 import pytest
 
-from aoc.aoc_cli import cli, get_project_root
+from aoc import get_project_root
+from aoc.aoc_cli import cli
 
 
 @pytest.fixture

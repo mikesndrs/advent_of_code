@@ -50,6 +50,7 @@ disallow_untyped_calls = true
 disallow_untyped_defs = true
 disallow_untyped_decorators = true
 exclude = [
+    "docs/*",
     "aoc/templates/*",
     "aoc/aoc_2022/*",
     "aoc/aoc_2023/python/ex_03.py",
