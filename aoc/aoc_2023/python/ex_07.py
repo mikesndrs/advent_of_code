@@ -1,6 +1,8 @@
 """https://adventofcode.com/2023/day/7"""
 
-HAND_DICT = dict[str, int]
+from typing import Dict, List, Tuple
+
+HAND_DICT = Dict[str, int]
 
 
 card_strength = {
@@ -19,7 +21,7 @@ card_strength = {
     "A": 14,
 }
 
-card_strength_2 = dict(card_strength, **{"J": 1})
+card_strength_2 = Dict(card_strength, **{"J": 1})
 
 
 type_strength = {
@@ -34,7 +36,7 @@ type_strength = {
 
 
 def get_hand_dict(hand: str) -> HAND_DICT:
-    nums: dict[str, int] = {}
+    nums: Dict[str, int] = {}
     for char in hand:
         nums[char] = nums.get(char, 0) + 1
     sorted_hand = {
@@ -50,7 +52,7 @@ def get_hand_dict(hand: str) -> HAND_DICT:
 def get_hand_type(hand_dict: HAND_DICT, version: int) -> str:
     if version == 2 and "J" in hand_dict.keys() and len(hand_dict) > 1:
         n_jokers = hand_dict.pop("J")
-        key = list(hand_dict.keys())[0]
+        key = List(hand_dict.keys())[0]
         hand_dict[key] = hand_dict.get(key, 0) + n_jokers
     if 5 in hand_dict.values():
         return "five of a kind"
@@ -60,15 +62,15 @@ def get_hand_type(hand_dict: HAND_DICT, version: int) -> str:
         return "full house"
     elif 3 in hand_dict.values():
         return "three of a kind"
-    elif list(hand_dict.values()).count(2) == 2:
+    elif List(hand_dict.values()).count(2) == 2:
         return "two pair"
-    elif list(hand_dict.values()).count(2) == 1:
+    elif List(hand_dict.values()).count(2) == 1:
         return "one pair"
     else:
         return "high card"
 
 
-def compare_hand_strengths(i: int, hands: list[str], version: int) -> tuple[int, ...]:
+def compare_hand_strengths(i: int, hands: List[str], version: int) -> Tuple[int, ...]:
     hand_dict = get_hand_dict(hands[i])
     my_type_strength = type_strength[get_hand_type(hand_dict, version)]
     if version == 1:
@@ -80,9 +82,9 @@ def compare_hand_strengths(i: int, hands: list[str], version: int) -> tuple[int,
 
 
 def sort_by_hand_strength(
-    hands: list[str], bids: list[int], version: int
-) -> tuple[list[str], list[int]]:
-    idcs = list(range(len(hands)))
+    hands: List[str], bids: List[int], version: int
+) -> Tuple[List[str], List[int]]:
+    idcs = List(range(len(hands)))
     sorted_idcs = sorted(
         idcs, key=lambda i: compare_hand_strengths(i, hands, version), reverse=True
     )

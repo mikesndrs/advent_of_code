@@ -1,7 +1,9 @@
 """https://adventofcode.com/2023/day/6"""
 
+from typing import List
 
-def list_from_line(line: str, version: int) -> list[int]:
+
+def list_from_line(line: str, version: int) -> List[int]:
     preprocessed_line = line.split(":")[1].strip().split(" ")
     int_list = [x.strip() for x in preprocessed_line if len(x) > 0]
     if version == 1:

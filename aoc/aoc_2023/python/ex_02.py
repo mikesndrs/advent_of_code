@@ -1,14 +1,16 @@
 """https://adventofcode.com/2023/day/2"""
 
+from typing import Dict, List, Tuple
 
-def prep_line(line: str) -> tuple[int, list[str]]:
+
+def prep_line(line: str) -> Tuple[int, List[str]]:
     split_line = line.split(":")
     id = int(split_line[0].split(" ")[-1])
     subsets = split_line[1].split(";")
     return id, subsets
 
 
-def get_max_occ(subsets: list[str]) -> dict:
+def get_max_occ(subsets: List[str]) -> Dict:
     max_occ: dict[str, int] = {}
     for subset in subsets:
         for color_occ in subset.split(","):
@@ -19,19 +21,19 @@ def get_max_occ(subsets: list[str]) -> dict:
     return max_occ
 
 
-def game_is_possible(max_occ: dict, occ_dict: dict) -> bool:
+def game_is_possible(max_occ: Dict, occ_dict: Dict) -> bool:
     possible_dict = [occ >= max_occ.get(color, 0) for color, occ in occ_dict.items()]
     return all(possible_dict)
 
 
-def get_power_minimal_cube(max_occ: dict, occ_dict: dict) -> int:
+def get_power_minimal_cube(max_occ: Dict, occ_dict: Dict) -> int:
     result = 1
     for color in occ_dict.keys():
         result *= max_occ.get(color, 0)
     return result
 
 
-def sum_possible_ids(input_filename: str, occ_dict: dict) -> int:
+def sum_possible_ids(input_filename: str, occ_dict: Dict) -> int:
     with open(input_filename) as f:
         result = 0
         for line in f:
@@ -43,7 +45,7 @@ def sum_possible_ids(input_filename: str, occ_dict: dict) -> int:
     return result
 
 
-def sum_power_minimal_cubes(input_filename: str, occ_dict: dict) -> int:
+def sum_power_minimal_cubes(input_filename: str, occ_dict: Dict) -> int:
     with open(input_filename) as f:
         result = 0
         for line in f:

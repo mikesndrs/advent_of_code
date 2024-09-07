@@ -1,5 +1,7 @@
 """https://adventofcode.com/2023/day/8"""
 
+from typing import Dict, Tuple
+
 # TODO: FINISH actual exercise since the answer is not to the actual question
 LR_dict = {
     "L": 0,
@@ -17,7 +19,7 @@ def pattern_divide_func(pattern: str) -> str:
     return pattern
 
 
-def handle_input(input_filename: str) -> tuple[str, dict]:
+def handle_input(input_filename: str) -> Tuple[str, Dict]:
     with open(input_filename) as f:
         lines = f.readlines()
         pattern = lines[0].strip()
@@ -32,7 +34,7 @@ def handle_input(input_filename: str) -> tuple[str, dict]:
     return pattern, network
 
 
-def follow_network(pattern: str, network: dict) -> int:
+def follow_network(pattern: str, network: Dict) -> int:
     pattern_len = len(pattern)
     val = "AAA"
     res = 0
@@ -43,7 +45,7 @@ def follow_network(pattern: str, network: dict) -> int:
 
 
 # {start_val, [[z_vals] [start_pattern_idx, pattern_rep_freq]]}
-def get_occ_list(pattern: str, network: dict) -> dict:
+def get_occ_list(pattern: str, network: Dict) -> Dict:
     vals = list(filter(lambda x: x[-1] == "A", list(network.keys())))
     pattern_len = len(pattern)
     occ_list = {}
@@ -51,7 +53,7 @@ def get_occ_list(pattern: str, network: dict) -> dict:
         val_i = val
         ctr = 0
         iter = 0
-        seen_vals: dict[int, dict[int, int]] = {}
+        seen_vals: Dict[int, Dict[int, int]] = {}
         while True:
             val_i = network[val_i][LR_dict[pattern[ctr]]]
             ctr += 1
@@ -72,7 +74,7 @@ def get_occ_list(pattern: str, network: dict) -> dict:
     return occ_list
 
 
-def follow_network_ghost(pattern: str, network: dict) -> int:
+def follow_network_ghost(pattern: str, network: Dict) -> int:
     occ_list = get_occ_list(pattern, network)
     print(len(pattern))
     print(occ_list)
