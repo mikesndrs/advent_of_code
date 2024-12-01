@@ -42,7 +42,7 @@ def init(year: int, number: int, language: str) -> None:
                 with open(template_base / template_name, mode="r") as f:
                     content = f.read()
                 content = content.replace("<year>", str(year))
-                content = content.replace("<number>", str(number))
+                content = content.replace("<number>", str(number).zfill(2))
                 with open(filename, mode="w") as f:
                     f.write(content)
             else:
