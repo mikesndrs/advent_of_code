@@ -2,6 +2,7 @@
 
 
 def handle_input(input_filename: str) -> tuple[list, list]:
+    """Make separate list from inputs"""
     list1, list2 = [], []
     with open(input_filename, "r") as f:
         for line in f:
@@ -12,6 +13,7 @@ def handle_input(input_filename: str) -> tuple[list, list]:
 
 
 def calculate_difference(list1: list, list2: list) -> int:
+    """Calculate difference score by subtracting sorted list elements"""
     list1.sort()
     list2.sort()
     result = 0
@@ -21,6 +23,7 @@ def calculate_difference(list1: list, list2: list) -> int:
 
 
 def calculate_similarity(list1: list, list2: list) -> int:
+    """Calculate similarity score by multiplying each value with its overlap count"""
     result = 0
     count_dict1: dict[int, int] = {}
     count_dict2: dict[int, int] = {}
@@ -34,6 +37,7 @@ def calculate_similarity(list1: list, list2: list) -> int:
 
 
 def main_func(input_filename: str, version: int) -> int:
+    """Main function"""
     list1, list2 = handle_input(input_filename)
     if version == 1:
         result = calculate_difference(list1, list2)
@@ -44,6 +48,7 @@ def main_func(input_filename: str, version: int) -> int:
 
 
 def main() -> None:
+    """Top level function"""
     # Part 1
     assert main_func("aoc/aoc_2024/inputs/01_test.txt", 1) == 11
     assert main_func("aoc/aoc_2024/inputs/01.txt", 1) == 1830467
