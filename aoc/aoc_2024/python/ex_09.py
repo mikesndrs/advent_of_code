@@ -1,12 +1,16 @@
 """https://adventofcode.com/2024/day/09"""
 
+from typing import Any, Dict, List, Union
 
-def handle_input(input_filename: str):
+MEM = List[Union[int, str]]
+
+
+def handle_input(input_filename: str) -> MEM:
     """Get list of memory block"""
     with open(input_filename, "r") as f:
         a = f.readline().strip()
     ctr = 0
-    mem = []
+    mem: MEM = []
     for i, char in enumerate(a):
         if i % 2 == 0:
             mem += [ctr] * int(char)
@@ -16,7 +20,7 @@ def handle_input(input_filename: str):
     return mem
 
 
-def badly_optimized_memory(mem):
+def badly_optimized_memory(mem: MEM) -> MEM:
     """Optimize memory per block"""
     for i, char in enumerate(mem):
         if char == ".":
@@ -28,16 +32,20 @@ def badly_optimized_memory(mem):
     return mem
 
 
-def semi_optimized_memory(input_filename):
+def semi_optimized_memory(input_filename: str) -> MEM:
     """Optimize memory per file"""
     with open(input_filename, "r") as f:
         a = f.readline().strip()
         a += "0"
-    files = []
+    files: List[Dict[str, Any]] = []
     for i in range(0, len(a), 2):
         idx = int(i / 2)
         files.append(
-            {"files": [idx] * int(a[i]), "new_files": [], "space": int(a[i + 1])}
+            {
+                "files": [idx for _ in range(int(a[i]))],
+                "new_files": [],
+                "space": int(a[i + 1]),
+            }
         )
     for i in range(len(files) - 1, 0, -1):
         for j in range(i):
