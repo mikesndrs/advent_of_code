@@ -35,7 +35,7 @@ def init(year: int, number: int, language: str) -> None:
         (base / "python" / f"ex_{number:02}.py", "code.py"),
         (base / "inputs" / f"{number:02}.txt", None),
         (base / "inputs" / f"{number:02}_test.txt", None),
-        (base / "python" / "tests" / f"test_{number:02}.py", "test.py"),
+        (base / "python" / "tests" / f"test_{year}_{number:02}.py", "test.py"),
     ]:
         if not filename.exists():
             if template_name is not None:
