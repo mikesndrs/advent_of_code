@@ -15,6 +15,7 @@ def handle_input(input_filename: str) -> List[str]:
 
 
 def get_rotations(pos: int, new_pos: int, version: int) -> int:
+    """Calculate number of rotations for given move"""
     if version == 1:
         if new_pos % MOD == 0:
             return 1
@@ -30,6 +31,7 @@ def get_rotations(pos: int, new_pos: int, version: int) -> int:
 
 
 def main_func(input_filename: str, version: int) -> int:
+    """Calculate number of rotations over course of multiple moves"""
     pos = 50
     res = 0
     turns = handle_input(input_filename)
