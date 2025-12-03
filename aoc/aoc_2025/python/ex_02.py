@@ -41,11 +41,13 @@ def get_invalids(eff_range: List[str], version: int) -> List[int]:
         end_1 = end[:length]
         if int(n * start_1) >= int(start) and int(n * start_1) <= int(end):
             invalids.append(int(n * start_1))
-        if all([
-            int(end_1) - int(start_1) >= 1,
-            int(n * end_1) >= int(start),
-            int(n * end_1) <= int(end),
-        ]):
+        if all(
+            [
+                int(end_1) - int(start_1) >= 1,
+                int(n * end_1) >= int(start),
+                int(n * end_1) <= int(end),
+            ]
+        ):
             invalids.append(int(n * end_1))
         invalids += [int(n * str(i)) for i in range(int(start_1) + 1, int(end_1))]
     return list(set(invalids))
