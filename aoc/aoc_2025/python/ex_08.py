@@ -1,6 +1,6 @@
 """https://adventofcode.com/2025/day/08"""
 
-from typing import List, Tuple, Set
+from typing import List, Set, Tuple
 
 POS = Tuple[int, ...]
 GROUP = Set[POS]

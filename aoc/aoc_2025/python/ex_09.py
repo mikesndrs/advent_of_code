@@ -1,7 +1,6 @@
 """https://adventofcode.com/2025/day/09"""
 
-from typing import List, Tuple, Sequence
-
+from typing import List, Sequence, Tuple
 
 POS = Tuple[int, ...]
 

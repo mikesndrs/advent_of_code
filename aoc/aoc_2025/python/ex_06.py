@@ -1,8 +1,7 @@
 """https://adventofcode.com/2025/day/06"""
 
-from typing import Callable, List, Tuple
 from functools import reduce
-
+from typing import Callable, List, Tuple
 
 MY_NUMS = List[List[int]]
 MY_OPS = List[Callable]
@@ -72,7 +71,6 @@ def main() -> None:
     assert main_func("aoc/aoc_2025/inputs/06.txt", 1) == 6295830249262
     # # Part 2
     assert main_func("aoc/aoc_2025/inputs/06_test.txt", 2) == 3263827
-    # print(main_func("aoc/aoc_2025/inputs/06.txt", 2)
     assert main_func("aoc/aoc_2025/inputs/06.txt", 2) == 9194682052782
 
 

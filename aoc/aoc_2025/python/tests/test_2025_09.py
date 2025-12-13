@@ -9,7 +9,7 @@ from aoc.aoc_2025.python.ex_09 import main_func
         ("aoc/aoc_2025/inputs/09_test.txt", 1, 50),
         ("aoc/aoc_2025/inputs/09.txt", 1, 4763509452),
         ("aoc/aoc_2025/inputs/09_test.txt", 2, 24),
-        pytest.params(
+        pytest.param(
             "aoc/aoc_2025/inputs/09.txt",
             2,
             1516897893,

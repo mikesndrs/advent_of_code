@@ -1,6 +1,6 @@
 """https://adventofcode.com/2025/day/04"""
 
-from typing import Dict, Tuple, List
+from typing import Dict, List, Tuple
 
 MAX_NEIGHBORS = 4
 MY_GRID = Dict[Tuple[int, int], List[Tuple[int, int]]]

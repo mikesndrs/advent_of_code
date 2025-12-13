@@ -1,6 +1,6 @@
 """https://adventofcode.com/2025/day/07"""
 
-from typing import Tuple, Set, Dict
+from typing import Dict, Set, Tuple
 
 POS = Tuple[int, int]
 
