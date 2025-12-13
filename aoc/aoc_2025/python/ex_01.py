@@ -42,6 +42,7 @@ def main_func(input_filename: str, version: int) -> int:
             new_pos = pos - int(turn[1:])
         res += get_rotations(pos, new_pos, version)
         pos = new_pos % MOD
+    print(res)
     return res
 
 

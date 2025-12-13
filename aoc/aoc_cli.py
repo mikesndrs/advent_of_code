@@ -1,5 +1,7 @@
 """CLI commands"""
 
+import runpy
+
 import click
 
 from aoc import get_project_root
@@ -10,7 +12,8 @@ from aoc import get_project_root
 @click.argument("number", type=int)
 def run(year: int, number: int) -> None:
     """Run exercise for a given year and number"""
-    print(f"run {year} {number}")
+    module_str = f"aoc.aoc_{year}.python.ex_{number:02}"
+    runpy.run_module(module_str, run_name="__main__")
 
 
 @click.command()
