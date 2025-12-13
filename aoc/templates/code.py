@@ -1,8 +1,20 @@
 """https://adventofcode.com/<year>/day/<number>"""
 
+from typing import List
+
+
+def handle_input(input_filename: str) -> List[str]:
+    with open(input_filename, "r") as f:
+        for line in f:
+            pass
+
 
 def main_func(input_filename: str, version: int) -> int:
-    pass
+    input = handle_input(input_filename)
+    res = 0
+
+    print(res)
+    return res
 
 
 def main() -> None:
