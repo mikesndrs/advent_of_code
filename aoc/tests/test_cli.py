@@ -23,7 +23,7 @@ def test_run_no_args(runner, tmpdir):
 
 def test_run_args(runner, tmpdir):
     """Test whether no arguments fails"""
-    result = runner.invoke(cli, ["run", "2023", "8"])
+    result = runner.invoke(cli, ["run", "2025", "8"])
 
     assert result.exit_code == 0
 
@@ -37,7 +37,7 @@ def test_profile_no_args(runner, tmpdir):
 
 def test_profile_args(runner, tmpdir):
     """Test whether no arguments fails"""
-    result = runner.invoke(cli, ["profile", "2023", "8"])
+    result = runner.invoke(cli, ["profile", "2025", "8"])
 
     assert result.exit_code == 0
 
@@ -53,15 +53,15 @@ def test_init_args(runner, tmpdir):
     """Test whether with arguments works"""
     root = get_project_root()
     copy_tree(str(root / "aoc" / "templates"), str(Path(tmpdir) / "aoc" / "templates"))
-    target_dir = Path(tmpdir) / "aoc" / "aoc_2023"
-    source_dir = root / "aoc" / "aoc_2023"
+    target_dir = Path(tmpdir) / "aoc" / "aoc_2025"
+    source_dir = root / "aoc" / "aoc_2025"
     (target_dir / "python" / "tests").mkdir(parents=True)
     (target_dir / "inputs").mkdir(parents=True)
     with patch(
         "aoc.aoc_cli.get_project_root",
         return_value=Path(tmpdir),
     ):
-        result = runner.invoke(cli, ["init", "2023", "30"])
+        result = runner.invoke(cli, ["init", "2025", "30"])
 
     assert result.exit_code == 0
     assert Path.exists(target_dir / "python" / "ex_30.py")
