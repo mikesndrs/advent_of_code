@@ -40,6 +40,12 @@ def init(year: int, number: int, language: str) -> None:
         (base / "inputs" / f"{number:02}_test.txt", None),
         (base / "python" / "tests" / f"test_{year}_{number:02}.py", "test.py"),
     ]:
+        filename.parent.mkdir(parents=True, exist_ok=True)
+        for parent in filename.parents:
+            init_file = parent / "__init__.py"
+            init_file.touch(exist_ok=True)
+            if parent == root / "aoc":
+                break
         if not filename.exists():
             if template_name is not None:
                 with open(template_base / template_name, mode="r") as f:
