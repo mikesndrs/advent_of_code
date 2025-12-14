@@ -34,18 +34,19 @@ def init(year: int, number: int, language: str) -> None:
     root = get_project_root()
     base = root / "aoc" / f"aoc_{year}"
     template_base = root / "aoc" / "templates"
-    for filename, template_name in [
-        (base / "python" / f"ex_{number:02}.py", "code.py"),
-        (base / "inputs" / f"{number:02}.txt", None),
-        (base / "inputs" / f"{number:02}_test.txt", None),
-        (base / "python" / "tests" / f"test_{year}_{number:02}.py", "test.py"),
+    for filename, template_name, get_init in [
+        (base / "python" / f"ex_{number:02}.py", "code.py", True),
+        (base / "inputs" / f"{number:02}.txt", None, False),
+        (base / "inputs" / f"{number:02}_test.txt", None, False),
+        (base / "python" / "tests" / f"test_{year}_{number:02}.py", "test.py", False),
     ]:
         filename.parent.mkdir(parents=True, exist_ok=True)
-        for parent in filename.parents:
-            init_file = parent / "__init__.py"
-            init_file.touch(exist_ok=True)
-            if parent == root / "aoc":
-                break
+        if get_init:
+            for parent in filename.parents:
+                init_file = parent / "__init__.py"
+                init_file.touch(exist_ok=True)
+                if parent == root / "aoc":
+                    break
         if not filename.exists():
             if template_name is not None:
                 with open(template_base / template_name, mode="r") as f:
